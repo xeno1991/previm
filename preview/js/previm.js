@@ -34,7 +34,9 @@
       needReload = true;
     }
     if (needReload && (typeof getContent === 'function') && (typeof getFileType === 'function')) {
-      _doc.getElementById('preview').innerHTML = transform(getFileType(), getContent());
+      var previewElement = _doc.getElementById('preview');
+      previewElement.innerHTML = transform(getFileType(), getContent());
+      MathJax.Hub.Queue(["Typeset",MathJax.Hub,previewElement]);
     }
   }
 
