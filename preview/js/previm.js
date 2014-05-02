@@ -34,9 +34,13 @@
       needReload = true;
     }
     if (needReload && (typeof getContent === 'function') && (typeof getFileType === 'function')) {
-      var previewElement = _doc.getElementById('preview');
-      previewElement.innerHTML = transform(getFileType(), getContent());
-      MathJax.Hub.Queue(["Typeset",MathJax.Hub,previewElement]);
+      _doc.getElementById('preview').innerHTML = transform(getFileType(), getContent());
+      
+      MathJax.Hub.Queue(
+              ["resetEquationNumbers",MathJax.InputJax.TeX],
+              ["PreProcess",MathJax.Hub],
+              ["Reprocess",MathJax.Hub]
+              );
     }
   }
 
